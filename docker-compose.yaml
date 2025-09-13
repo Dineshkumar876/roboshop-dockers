@@ -18,7 +18,7 @@ services:
   - mongodb: /data/db
 
   catalogue:
-  image: dinesh85/catalogue:v1
+  image: catalogue:v1
   container_name: catalogue
   depends_on:
    - mongodb
