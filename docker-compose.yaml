@@ -24,7 +24,7 @@ services:
    - mongodb
   
   redis:
-  image: dinesh85/redis:7.0
+  image: dinesh85/redis:7
   container_name: redis
   volumes:
   - redis: /data
