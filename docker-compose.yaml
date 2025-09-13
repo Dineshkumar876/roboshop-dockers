@@ -47,7 +47,7 @@ services:
   image: dinesh85/mysql:v1
   container_name: mysql
   volumes:
-  -mysql: /data/db
+  -mysql: /var/lib/mysql
 
   shipping:
   image: dinesh85/shipping:v1
