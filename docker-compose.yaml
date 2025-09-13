@@ -1,0 +1,58 @@
+network:
+ default:
+   drive: bridge
+   name: roboshop
+   #external: true #I created network already using docker network create roboshop
+
+volumes:
+ mongodb:
+ redis:
+ mysql:
+ rabbitmq: # docker volume create rabbitmq
+
+services:
+  mongodb:
+   image: dinesh/mongodb:v1
+   container_name: mongodb
+  volumes:
+  - mongodb: /data/db
+
+  catalogue:
+  image: dinesh/catalogue:v1
+  container_name: catalogue
+  depends_on:
+   - mongodb
+  
+  redis:
+  image: dinesh/redis:v1
+  container_name: redis
+  volumes:
+  - redis: /data
+
+  user:
+  image: dinesh/user:v1
+  container_name: user
+  depends_on:
+   - redis/mongodb
+
+  cart:
+  image: dinesh/cart:v1
+  container_name: cart
+  depends_on:
+   - redis/catalogue
+
+  mysql:
+  image: dinesh/mysql:v1
+  container_name: mysql
+  volumes:
+  -mysql: /data/db
+
+  shipping:
+  image: dinesh/shipping:v1
+  container_name: shipping
+  depends_on:
+  - cart/mysql
+
+
+
+
