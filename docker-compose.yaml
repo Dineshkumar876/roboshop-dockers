@@ -33,13 +33,15 @@ services:
   image: user:v1
   container_name: user
   depends_on:
-   - redis/mongodb
+   - redis
+   - mongodb
 
   cart:
   image: dinesh85/cart:v1
   container_name: cart
   depends_on:
-   - redis/catalogue
+   - redis
+   - catalogue
 
   mysql:
   image: dinesh85/mysql:v1
@@ -51,7 +53,8 @@ services:
   image: dinesh85/shipping:v1
   container_name: shipping
   depends_on:
-  - cart/mysql
+  - cart
+  - mysql
 
 
 
