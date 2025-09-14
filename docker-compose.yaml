@@ -11,51 +11,51 @@ volumes:
  rabbitmq: # docker volume create rabbitmq
 
 services:
-  mongodb:
+  # mongodb:
+  #   image: dinesh162/mongodb:v1
+  #   container_name: mongodb
+  #   volumes:
+  #   - mongodb: /data/db
+
+mongodb:
     image: dinesh162/mongodb:v1
     container_name: mongodb
     volumes:
-    - mongodb: /data/db
+    - mongodb:/data/db
 
-    # mongodb:
-#     image: joindevops/mongodb:v1
-#     container_name: mongodb
-#     volumes:
-#     - mongodb:/data/db
-
-  catalogue:
+catalogue:
     image: dinesh162/catalogue:v1
     container_name: catalogue
     depends_on:
     - mongodb
   
-  redis:
+redis:
     image: /redis:7
     container_name: redis
     volumes:
     - redis: /data
 
-  user:
+user:
     image: dinesh162/user:v1
     container_name: user
     depends_on:
     - redis
     - mongodb
 
-  cart:
+cart:
     image: dinesh162/cart:v1
     container_name: cart
     depends_on:
     - redis
     - catalogue
 
-  mysql:
+mysql:
     image: dinesh162/mysql:v1
     container_name: mysql
     volumes:
     -mysql: /var/lib/mysql
 
-  shipping:
+shipping:
     image: dinesh162/shipping:v1
     container_name: shipping
     depends_on:
