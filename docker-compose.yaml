@@ -1,6 +1,6 @@
-network:
+networks:
  default:
-   drive: bridge
+   driver: bridge
    name: roboshop
    #external: true #I created network already using docker network create roboshop
 
