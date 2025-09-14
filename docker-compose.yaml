@@ -12,45 +12,45 @@ volumes:
 
 services:
   mongodb:
-   image: dinesh85/mongodb:v1
+   image: dinesh162/mongodb:v1
    container_name: mongodb
   volumes:
   - mongodb: /data/db
 
   catalogue:
-  image: dinesh85/catalogue:v1
+  image: dinesh162/catalogue:v1
   container_name: catalogue
   depends_on:
    - mongodb
   
   redis:
-  image: dinesh85/redis:7
+  image: dinesh162/redis:7
   container_name: redis
   volumes:
   - redis: /data
 
   user:
-  image: dinesh85/user:v1
+  image: dinesh162/user:v1
   container_name: user
   depends_on:
    - redis
    - mongodb
 
   cart:
-  image: dinesh85/cart:v1
+  image: dinesh162/cart:v1
   container_name: cart
   depends_on:
    - redis
    - catalogue
 
   mysql:
-  image: dinesh85/mysql:v1
+  image: dinesh162/mysql:v1
   container_name: mysql
   volumes:
   -mysql: /var/lib/mysql
 
   shipping:
-  image: dinesh85/shipping:v1
+  image: dinesh162/shipping:v1
   container_name: shipping
   depends_on:
   - cart
