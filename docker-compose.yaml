@@ -1,60 +1,53 @@
-network:
- default:
-   drive: bridge
-   name: roboshop
-   #external: true #I created network already using docker network create roboshop
-
+networks:
+  default:
+    driver: bridge
+    name: roboshop
+    #external: true #I created network already using docker network create roboshop
 volumes:
- mongodb:
- redis:
- mysql:
- rabbitmq: # docker volume create rabbitmq
-
+  mongodb:
+  redis:
+  mysql:
+  rabbitmq: # docker volume create rabbitmq
 services:
   mongodb:
-   image: dinesh162/mongodb:v1
-   container_name: mongodb
-  volumes:
-  - mongodb: /data/db
-
+    image: dinesh162/mongodb:v1
+    container_name: mongodb
+    volumes:
+    - mongodb:/data/db
   catalogue:
-  image: dinesh162/catalogue:v1
-  container_name: catalogue
-  depends_on:
-   - mongodb
-  
+    image: dinesh162/catalogue:v1
+    container_name: catalogue
+    depends_on:
+    - mongodb
   redis:
-  image: dinesh162/redis:7
-  container_name: redis
-  volumes:
-  - redis: /data
+    image: redis:7.0
+    container_name: redis
+    volumes:
+    - redis:/data
 
   user:
-  image: dinesh162/user:v1
-  container_name: user
-  depends_on:
-   - redis
-   - mongodb
-
+    image: dinesh162/user:v1
+    container_name: user
+    depends_on:
+    - redis
+    - mongodb
   cart:
-  image: dinesh162/cart:v1
-  container_name: cart
-  depends_on:
-   - redis
-   - catalogue
-
+    image: dinesh162/cart:v1
+    container_name: cart
+    depends_on:
+    - catalogue
+    - redis
   mysql:
-  image: dinesh162/mysql:v1
-  container_name: mysql
-  volumes:
-  -mysql: /var/lib/mysql
-
+    image: dinesh162/mysql:v1
+    container_name: mysql
+    volumes:
+    - mysql:/var/lib/mysql
   shipping:
-  image: dinesh162/shipping:v1
-  container_name: shipping
-  depends_on:
-  - cart
-  - mysql
+    image: dinesh162/shipping:v1
+    container_name: shipping
+    depends_on:
+    - mysql
+    - cart
 
 
 
