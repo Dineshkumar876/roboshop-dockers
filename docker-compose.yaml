@@ -61,7 +61,9 @@ services:
     container_name: rabbitmq
     environment:
      RABBITMQ_DEFAULT_USER: rabbitmq
-     RABBITMQ_DEFAULT_PASS: roboshop123  
+     RABBITMQ_DEFAULT_PASS: roboshop123
+     
+       
 
 
 
