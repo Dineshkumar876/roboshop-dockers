@@ -22,6 +22,7 @@ services:
     container_name: catalogue
     depends_on:
     - mongodb
+    
   
   redis:
     image: redis:7
@@ -62,6 +63,8 @@ services:
     environment:
      RABBITMQ_DEFAULT_USER: rabbitmq
      RABBITMQ_DEFAULT_PASS: roboshop123
+    volumes:
+    - rabbitmq:/var/lib/rabbitmq
 
   payment:
     image: dinesh162/payment:v1
